@@ -11,7 +11,10 @@ import parentView from '@/components/parent-view'
  * }
  */
 
-export default [
+ /**
+  * 系统公用的路由
+  */
+const defaultRoutes = [
   {
     path: '/login',
     name: 'login',
@@ -255,7 +258,12 @@ export default [
         ]
       }
     ]
-  },
+  }
+]
+/**
+ * 错误页面的路由
+ */
+const errorRoutes = [
   {
     path: '/401',
     name: 'error_401',
@@ -271,4 +279,48 @@ export default [
     name: 'error_404',
     component: () => import('@/view/error-page/404.vue')
   }
+]
+/**
+ * 需要授权的路由，根据系统业务，按需修改
+ */
+const appRoutes = [
+  {
+    path: '/auth_manage',
+    name: '权限管理',
+    meta: {
+      access: ['ptyg', 'super_admin'],
+      icon: 'social-buffer',
+      title: '权限管理'
+    },
+    component: Main,
+    component1: 'main',
+    children: [
+      {
+        path: 'user_manage',
+        name: '用户管理',
+        meta: {
+          access: ['ptyg', 'super_admin'],
+          icon: 'arrow-graph-up-right',
+          title: '用户管理'
+        },
+        component: () => import('@/view/components/count-to/count-to.vue'),
+      },
+      {
+        path: 'role_manage',
+        name: '角色管理',
+        meta: {
+          access: ['ptyg', 'super_admin'],
+          icon: 'arrow-graph-up-right',
+          title: '角色管理'
+        },
+        component: () => import('@/view/components/tables/tables.vue'),
+      }
+    ]
+  }
+]
+
+export default [
+  ...defaultRoutes,
+  ...appRoutes,
+  ...errorRoutes
 ]

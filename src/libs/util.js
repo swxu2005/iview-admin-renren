@@ -15,6 +15,23 @@ export const getToken = () => {
   else return false
 }
 
+export const setLocalStorage = (name, content) => {
+  if (!name) return
+  if (typeof content !== 'string') {
+    content = JSON.stringify(content)
+  }
+  window.localStorage.setItem(name, content)
+}
+
+export const getLocalStorage = name => {
+  if (!name) return
+  let result = window.localStorage.getItem(name)
+  if (result) {
+    result = JSON.parse(result)
+  }
+  return result
+}
+
 export const hasChild = (item) => {
   return item.children && item.children.length !== 0
 }
