@@ -42,7 +42,8 @@ class httpRequest {
           // Spin.hide()
         }, 500)
       }
-      if (!(data instanceof Blob)) {
+      // 个别后端接口，返回的直接是一个数组
+      if (!(data instanceof Blob) && !(Array.isArray(data))) {
         if (data.code !== 0) {
           // 后端服务在个别情况下回报201，待确认
           if (data.code === 401) {

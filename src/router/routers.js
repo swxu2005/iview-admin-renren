@@ -288,7 +288,6 @@ const appRoutes = [
     path: '/auth_manage',
     name: '权限管理',
     meta: {
-      access: ['ptyg', 'super_admin'],
       icon: 'social-buffer',
       title: '权限管理'
     },
@@ -296,24 +295,44 @@ const appRoutes = [
     component1: 'main',
     children: [
       {
-        path: 'user_manage',
-        name: '用户管理',
+        path: 'menu_manage',
+        name: '菜单管理',
         meta: {
-          access: ['ptyg', 'super_admin'],
+          access: ['sys:menu:list'],
           icon: 'arrow-graph-up-right',
           title: '用户管理'
         },
-        component: () => import('@/view/components/count-to/count-to.vue'),
+        component: () => import('@/view/admin/menu-manage/menu-manage.vue'),
+      },
+      {
+        path: 'user_manage',
+        name: '用户管理',
+        meta: {
+          access: ['sys:user:list'],
+          icon: 'arrow-graph-up-right',
+          title: '用户管理'
+        },
+        component: () => import('@/view/admin/user-manage/user-manage.vue'),
       },
       {
         path: 'role_manage',
         name: '角色管理',
         meta: {
-          access: ['ptyg', 'super_admin'],
+          access: ['sys:role:list'],
           icon: 'arrow-graph-up-right',
           title: '角色管理'
         },
-        component: () => import('@/view/components/tables/tables.vue'),
+        component: () => import('@/view/admin/role-manage/role-manage.vue'),
+      },
+      {
+        path: 'dept_manage',
+        name: '部门管理',
+        meta: {
+          access: ['sys:dept:list'],
+          icon: 'arrow-graph-up-right',
+          title: '部门管理'
+        },
+        component: () => import('@/view/admin/dept-manage/dept-manage.vue'),
       }
     ]
   }
